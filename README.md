@@ -44,36 +44,39 @@ Rather than focusing only on deploying a honeypot, this project emphasizes the c
 # 🏗️ Architecture
 
 ```
-                    Internet
+                    Attacker
                         │
-                 SSH Attackers
+                 SSH Connection
                         │
-                Cowrie Honeypot
+              Cowrie SSH Honeypot
                         │
-             JSON / Event Logs
+                 cowrie.json logs
                         │
-                 Wazuh Agent
+                  Wazuh Agent
                         │
-                 Wazuh Manager
+                  Secure Channel
+                        │
+                  Wazuh Manager
+                        │
+               Detection Rules
                         │
              Wazuh Dashboard
                         │
-      Dashboards • Alerts • Sigma Rules
+      Alerts • MITRE • Dashboards
 ```
 
 ---
 
 # 🧰 Technologies
 
-| Technology | Purpose |
-|------------|---------|
-| Wazuh | SIEM Platform |
-| Cowrie | SSH/Telnet Honeypot |
-| Ubuntu Server | Honeypot Host |
-| Python | Cowrie Runtime |
-| Sigma | Detection Rules |
-| MITRE ATT&CK | Threat Mapping |
-| Linux | Operating System |
+| Technology | Version | Purpose |
+|------------|----------|---------|
+| Wazuh | 4.14.6 | SIEM |
+| Cowrie | Latest | SSH/Telnet Honeypot |
+| Ubuntu Server | 26.04 LTS | Honeypot Host |
+| Python | 3.x | Cowrie Runtime |
+| Sigma | Latest | Detection Rules |
+| MITRE ATT&CK | Enterprise | Threat Mapping |
 
 ---
 
@@ -110,20 +113,21 @@ cowrie-threat-detection-lab/
 
 ---
 
-# 🚀 Project Roadmap
+## 🚀 Project Roadmap
 
 - [x] Deploy Wazuh SIEM
 - [x] Configure Ubuntu Server
 - [x] Register Ubuntu as Wazuh Agent
-- [ ] Install Cowrie
-- [ ] Configure Cowrie
-- [ ] Integrate Cowrie with Wazuh
-- [ ] Create custom Wazuh decoders
-- [ ] Develop Wazuh detection rules
-- [ ] Create Sigma detection rules
-- [ ] Build security dashboards
+- [x] Install Cowrie Honeypot
+- [x] Configure Cowrie
+- [x] Integrate Cowrie logs into Wazuh
+- [x] Create custom Wazuh detection rules
+- [ ] Develop Sigma detection rules
+- [ ] Build dashboards
+- [ ] Create attack scenarios
 - [ ] Map detections to MITRE ATT&CK
-- [ ] Document attack scenarios
+- [ ] Threat hunting queries
+- [ ] Detection tuning
 
 ---
 
@@ -156,6 +160,26 @@ This lab will include detections for:
 
 ---
 
+# 🚨 Current Detections
+
+Implemented custom detections include:
+
+- SSH Connection
+- Successful Login
+- Failed Login
+- Session Closed
+
+Future detections:
+
+- Command Execution
+- File Download
+- Malware Retrieval
+- Persistence Attempts
+- Reverse Shell
+- Reconnaissance Commands
+
+---
+
 # 🎯 MITRE ATT&CK Coverage
 
 | Technique | Description |
@@ -167,6 +191,40 @@ This lab will include detections for:
 | T1005 | Data from Local System |
 | T1105 | Ingress Tool Transfer |
 | T1070 | Indicator Removal on Host |
+
+---
+
+# 🔍 Detection Workflow
+
+Attack
+
+↓
+
+Cowrie logs event
+
+↓
+
+Wazuh Agent collects log
+
+↓
+
+JSON Decoder
+
+↓
+
+Custom Detection Rule
+
+↓
+
+Alert Generated
+
+↓
+
+Dashboard Visualization
+
+↓
+
+Threat Analysis
 
 ---
 
@@ -193,11 +251,29 @@ Cybersecurity | SOC | Detection Engineering | Blue Team
 
 ---
 
-# ⭐ Future Improvements
+# 🛡️ Skills Demonstrated
 
-- Integrate Suricata
-- Add Sysmon endpoint telemetry
-- Deploy Windows endpoint
-- Create automated attack simulations
-- Implement Threat Hunting use cases
-- Expand Sigma detection coverage
+- Detection Engineering
+- SIEM Administration
+- Wazuh Rule Development
+- Log Analysis
+- JSON Parsing
+- Threat Detection
+- MITRE ATT&CK Mapping
+- Linux Administration
+- Incident Analysis
+- SOC Operations
+
+---
+
+# ✨ Features
+
+- Cowrie SSH Honeypot deployment
+- Wazuh SIEM integration
+- JSON log collection
+- Custom Wazuh detection rules
+- MITRE ATT&CK mapping
+- Detection Engineering workflow
+- Attack simulation
+- Dashboard visualization
+- Sigma rule development
